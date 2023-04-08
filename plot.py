@@ -12,3 +12,5 @@ print(df.iloc[:, 0])
 fig, ax = plt.subplots()
 ax.pie(df['112年1月市占率'], labels = df.iloc[:, 0])
 plt.show()
+
+#plot
