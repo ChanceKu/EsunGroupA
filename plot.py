@@ -1,5 +1,19 @@
 # https://matplotlib.org/stable/gallery/pie_and_polar_charts/pie_features.html
 
+def store(data):
+    import os
+    import pandas as pd
+    # create folder if it does not exist
+    path = ".//df_csv"
+
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    # 把ratio_dict中的每個dataframe寫成"key.csv"
+    for key, value in data.items():
+        file_name = key + ".csv"
+        value.to_csv(os.path.join(".//df_csv//", file_name), encoding='utf-8', index=True)
+
 def plot(delete=False):
     import csv
     import pandas as pd
@@ -18,7 +32,7 @@ def plot(delete=False):
     plt.rcParams['font.sans-serif'] = ['Taipei Sans TC Beta']
 
     # 取得csv資料夾內的檔案
-    dir_path = './/csv'
+    dir_path = './/df_csv'
     dir_list = os.listdir(dir_path)
     fail_list=[]
     success_list=[]
