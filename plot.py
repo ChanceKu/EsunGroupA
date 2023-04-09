@@ -14,33 +14,39 @@ def plot(delete=False):
         subprocess.check_call(["python", '-m', 'pip', 'install', 'matplotlib'])
         import matplotlib.pyplot as plt
 
+    # 更改plt的font
     plt.rcParams['font.sans-serif'] = ['Taipei Sans TC Beta']
 
+    # 取得csv資料夾內的檔案
     dir_path = './/csv'
     dir_list = os.listdir(dir_path)
     fail_list=[]
     success_list=[]
 
+    # 迴圈打開csv並生成plot.png
     for file in dir_list:
         if file.endswith(".csv"):
             try:
                 df = pd.read_csv(os.path.join(dir_path, file), encoding="utf-8")
-
+                
+                #取得市占率
                 share = [] # market share
                 for i in range(13):
                     value = df.iloc[29, 14+2*i]
                     share.append(value)
                 
+                #取得排名
                 rank = []   # market ranking
                 for i in range(13):
                     value = df.iloc[29, 15+2*i]
                     rank.append(value)
 
+                #取得月份
                 month = []
                 for i in df.columns[1:14]:
                     month.append(i)
 
-                # Convert the 'month' list to the new format
+                # 把月份格式更改, 例:2022年01月 -> 2022/01
                 new_month = []
                 for m in month:
                     dt = datetime.strptime(m, '%Y年%m月')
@@ -55,14 +61,14 @@ def plot(delete=False):
                 # Plot the first dataset (share) on the left y-axis
                 color = 'tab:red'
                 ax1.set_xlabel('Month')
-                ax1.set_ylabel('市占率', color=color)     #中文會亂碼, to be fixed
+                ax1.set_ylabel('市占率', color=color)     #中文可能會亂碼, to be fixed
                 ax1.plot(new_month, share, color=color, marker='o')
                 ax1.tick_params(axis='y', labelcolor=color)
 
                 # Plot the second dataset (rank) on the right y-axis
                 ax2 = ax1.twinx()  # Create a second y-axis that shares the same x-axis
                 color = 'tab:blue'
-                ax2.set_ylabel('排名', color=color)      #中文會亂碼, to be fixed
+                ax2.set_ylabel('排名', color=color)      #中文可能會亂碼, to be fixed
                 ax2.plot(new_month, rank, color=color, marker='o')
                 ax2.tick_params(axis='y', labelcolor=color)
 
