@@ -211,3 +211,13 @@ def plotcsv(csv_path='.//df_csv', delete = False):
     if delete == True:
         import shutil
         shutil.rmtree(csv_path)
+
+def getrow(path, row):
+    getrow_new_row = iloc[row]
+    return getrow_new_row
+
+def main():
+    return None
+
+if __name__ = "__main__":
+    main()
