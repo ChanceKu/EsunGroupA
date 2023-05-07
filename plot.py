@@ -13,19 +13,13 @@ def store(data, path = ".//df_csv"):
         file_name = key + ".csv"
         value.to_csv(os.path.join(".//df_csv//", file_name), encoding='utf-8', index=True)
 
-def plotdir(dir_path='.//df_csv',delete=False):
+def plotdir(dir_path='.//csv',delete=False):
     import csv
     import pandas as pd
     from datetime import datetime
     import os
     import subprocess
-
-    # Use the subprocess module to run pip commands
-    try:
-        import matplotlib.pyplot as plt
-    except ImportError:
-        subprocess.check_call(["python", '-m', 'pip', 'install', 'matplotlib'])
-        import matplotlib.pyplot as plt
+    import matplotlib.pyplot as plt
 
     # 更改plt的font
     plt.rcParams['font.sans-serif'] = ['Taipei Sans TC Beta']
@@ -42,16 +36,10 @@ def plotdir(dir_path='.//df_csv',delete=False):
                 df = pd.read_csv(os.path.join(dir_path, file), encoding="utf-8")
                 
                 #取得市占率
-                share = [] # market share
-                for i in range(13):
-                    value = df.iloc[29, 14+2*i]
-                    share.append(value)
+                share = df["玉山商業銀行-市佔率"] # market share
                 
                 #取得排名
-                rank = []   # market ranking
-                for i in range(13):
-                    value = df.iloc[29, 15+2*i]
-                    rank.append(value)
+                rank = df["玉山商業銀行-排名"]   # market ranking
 
                 #取得月份
                 month = []
@@ -123,7 +111,7 @@ def plotdir(dir_path='.//df_csv',delete=False):
         import shutil
         shutil.rmtree(dir_path)
 
-def plotcsv(csv_path='.//df_csv', delete = False):
+def plotcsv(csv_path='.//csv', delete = False):
     # import module
     import csv
     import pandas as pd
@@ -219,5 +207,5 @@ def getrow(path, row):
 def main():
     return None
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     main()
