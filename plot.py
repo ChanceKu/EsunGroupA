@@ -65,13 +65,17 @@ def plots(dir, bk):
             os.makedirs(directory)
 
         # Save the plot
-        name = csv_name + '.png'
+        name = csv_name + "民營" + '.png'
         plt.savefig(os.path.join(".//graph//", name))
         plt.close()
 
 def main():
-    plots(".//csv", ["中國信託商業銀行", "台北富邦商業銀行", "國泰世華商業銀行", "合作金庫銀行", "兆豐國際商業銀行", "第一商業銀行", "臺灣銀行", "玉山商業銀行"])
+    plots(".//csv", ["合作金庫銀行", "國泰世華商業銀行", "第一商業銀行", "台北富邦商業銀行", "total"])
     return None
 
 if __name__ == "__main__":
     main()
+
+
+# 公股"中國信託商業銀行", "兆豐國際商業銀行", "臺灣銀行", "玉山商業銀行"
+# 民營"合作金庫銀行", "國泰世華商業銀行", "第一商業銀行", "台北富邦商業銀行"
